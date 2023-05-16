@@ -2,7 +2,8 @@ const number = document.querySelectorAll('.number');
 const operation = document.querySelectorAll('.op');
 const displayCurr = document.querySelector('.display-current');
 const displayOld = document.querySelector('.display-old');
-const equal = document.querySelector('.equal');
+const equalBtn = document.querySelector('.equal');
+const cancelBtn = document.querySelector('.cancel');
 
 let first = "";
 let sign = "";
@@ -10,7 +11,8 @@ let second = "";
 
 let shouldResetScreen = false;
 
-equal.addEventListener('click', evaluate);
+equalBtn.addEventListener('click', evaluate);
+cancelBtn.addEventListener('click', cancelButton);
 
 number.forEach(num => {
     num.addEventListener('click', displayValue);
@@ -27,6 +29,15 @@ function displayValue(e) {
 
 function resetScreen() {
     displayCurr.textContent = "";
+    shouldResetScreen = false;
+}
+
+function cancelButton() {
+    displayCurr.textContent = "";
+    displayOld.textContent = "";
+    first = "";
+    op = "";
+    second = "";
     shouldResetScreen = false;
 }
 
