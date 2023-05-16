@@ -1,5 +1,14 @@
 const number = document.querySelectorAll('.number');
 const operation = document.querySelectorAll('.op');
+const display = document.querySelector('.display');
+
+number.forEach(num => {
+    num.addEventListener('click', displayValue);
+});
+
+function displayValue(e) {
+    display.textContent += e.target.value;
+}
 
 function add(first, second) {
     return first + second;
