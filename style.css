@@ -21,9 +21,26 @@
 }
 
 .display {
+    display: flex;
+    flex-direction: column;
     height: 120px;
     background-color: white;
     margin: 10px 5px;
+    padding: 12px;
+}
+
+.display-old {
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    font-size: 25px;
+}
+
+.display-current {
+    display: flex;
+    justify-content: end;
+    align-items: last;
+    font-size: 40px;
 }
 
 button {
