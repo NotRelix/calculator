@@ -50,7 +50,7 @@ function deleteButton() {
 function setOperation(e) {
     if (first) {
         second = displayCurr.textContent;   
-        displayCurr.textContent = operate(+first, sign, +second);
+        displayCurr.textContent = operate(+first, sign, +second).toFixed(3);
     }
     sign = e.target.value;
     first = displayCurr.textContent;
@@ -60,7 +60,7 @@ function setOperation(e) {
 
 function evaluate() {
     second = displayCurr.textContent;
-    displayCurr.textContent = operate(+first, sign, +second);
+    displayCurr.textContent = operate(+first, sign, +second).toFixed(3);
     displayOld.textContent = `${first} ${sign} ${second} =`;
 }
 
