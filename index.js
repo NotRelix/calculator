@@ -59,6 +59,7 @@ function setOperation(e) {
 }
 
 function evaluate() {
+    if (shouldResetScreen) return;
     second = displayCurr.textContent;
     if (sign === '/' && second === '0') {
         alert("Can't Divide by Zero!");
@@ -67,6 +68,7 @@ function evaluate() {
     }
     displayCurr.textContent = Number(Math.round(operate(+first, sign, +second) + 'e3') + 'e-3');
     displayOld.textContent = `${first} ${sign} ${second} =`;
+    shouldResetScreen = true;
 }
 
 function add(first, second) {
