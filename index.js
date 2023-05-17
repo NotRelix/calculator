@@ -4,15 +4,16 @@ const displayCurr = document.querySelector('.display-current');
 const displayOld = document.querySelector('.display-old');
 const equalBtn = document.querySelector('.equal');
 const cancelBtn = document.querySelector('.cancel');
+const deleteBtn = document.querySelector('.delete');
 
 let first = "";
 let sign = "";
 let second = "";
-
 let shouldResetScreen = false;
 
 equalBtn.addEventListener('click', evaluate);
 cancelBtn.addEventListener('click', cancelButton);
+deleteBtn.addEventListener('click', deleteButton);
 
 number.forEach(num => {
     num.addEventListener('click', displayValue);
@@ -41,9 +42,18 @@ function cancelButton() {
     shouldResetScreen = false;
 }
 
+function deleteButton() {
+    const newText = displayCurr.textContent.slice(0, -1);
+    displayCurr.textContent = newText;
+}
+
 function setOperation(e) {
-    first = displayCurr.textContent;
+    if (first) {
+        second = displayCurr.textContent;   
+        displayCurr.textContent = operate(+first, sign, +second);
+    }
     sign = e.target.value;
+    first = displayCurr.textContent;
     displayOld.textContent = `${first} ${sign}`;
     shouldResetScreen = true;
 }
