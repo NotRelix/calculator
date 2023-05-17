@@ -10,6 +10,7 @@ let first = "";
 let sign = "";
 let second = "";
 let shouldResetScreen = false;
+let divideByZero = false;
 
 equalBtn.addEventListener('click', evaluate);
 cancelBtn.addEventListener('click', cancelButton);
@@ -42,14 +43,14 @@ function cancelButton() {
 }
 
 function deleteButton() {
-    const newText = displayCurr.textContent.slice(0, -1);
-    displayCurr.textContent = newText;
+    displayCurr.textContent = displayCurr.textContent.slice(0, -1);
 }
 
 function setOperation(e) {
-    if (first) {
-        second = displayCurr.textContent;   
-        displayCurr.textContent = Number(Math.round(operate(+first, sign, +second) + 'e3') + 'e-3');
+    if (first) evaluate();
+    if (divideByZero) {
+        divideByZero = false;
+        return;
     }
     sign = e.target.value;
     first = displayCurr.textContent;
@@ -59,6 +60,11 @@ function setOperation(e) {
 
 function evaluate() {
     second = displayCurr.textContent;
+    if (sign === '/' && second === '0') {
+        alert("Can't Divide by Zero!");
+        divideByZero = true;
+        return;
+    }
     displayCurr.textContent = Number(Math.round(operate(+first, sign, +second) + 'e3') + 'e-3');
     displayOld.textContent = `${first} ${sign} ${second} =`;
 }
@@ -91,7 +97,8 @@ function operate(first, operator, second) {
         result = multiply(first, second);
     }
     else if (operator === '/') {
-        result = divide(first, second);
+        if (second === 0) result = null;
+        else result = divide(first, second);
     }
     return result;
 }
