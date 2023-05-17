@@ -34,12 +34,11 @@ function resetScreen() {
 }
 
 function cancelButton() {
-    displayCurr.textContent = "";
     displayOld.textContent = "";
     first = "";
     op = "";
     second = "";
-    shouldResetScreen = false;
+    resetScreen();
 }
 
 function deleteButton() {
@@ -50,7 +49,7 @@ function deleteButton() {
 function setOperation(e) {
     if (first) {
         second = displayCurr.textContent;   
-        displayCurr.textContent = operate(+first, sign, +second).toFixed(3);
+        displayCurr.textContent = Number(Math.round(operate(+first, sign, +second) + 'e3') + 'e-3');
     }
     sign = e.target.value;
     first = displayCurr.textContent;
@@ -60,7 +59,7 @@ function setOperation(e) {
 
 function evaluate() {
     second = displayCurr.textContent;
-    displayCurr.textContent = operate(+first, sign, +second).toFixed(3);
+    displayCurr.textContent = Number(Math.round(operate(+first, sign, +second) + 'e3') + 'e-3');
     displayOld.textContent = `${first} ${sign} ${second} =`;
 }
 
